@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { it } from '@jest/globals';
+import { it, expect } from '@jest/globals';
 import { app } from '../../app';
 
 it('should return a 201 on successful signup', async () => {
@@ -60,4 +60,16 @@ it('should disallow duplicate emails', async () => {
       password: 'password',
     })
     .expect(400);
+});
+
+it('should set a cookie after successful signup', async () => {
+  const response = await request(app)
+    .post('/api/users/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+    })
+    .expect(201);
+
+  expect(response.get('Set-Cookie')).toBeDefined();
 });
