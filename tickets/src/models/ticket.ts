@@ -26,7 +26,7 @@ const ticketSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    useId: {
+    userId: {
       type: String,
       required: true,
     },
