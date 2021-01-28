@@ -35,18 +35,9 @@ router.post(
     // Run query to look at all orders. Find an order where to ticket
     // is the ticket we just found *and* the orders status is *not* cancelled.
     // If we find an order from that means the ticket *is* reserved
-    const existingOrder = await Order.findOne({
-      ticket: ticket,
-      status: {
-        $in: [
-          OrderStatus.Created,
-          OrderStatus.AwaitingPayment,
-          OrderStatus.Complete,
-        ],
-      },
-    });
+    const isReserved = await ticket.isReserved();
 
-    if (existingOrder) {
+    if (isReserved) {
       throw new BadRequestError('Ticket is already reserved ');
     }
 
