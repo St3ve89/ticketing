@@ -1,8 +1,7 @@
-import { OrderStatus } from '@iacstickets/common';
 import mongoose from 'mongoose';
 import request from 'supertest';
 import { app } from '../../app';
-import { Order } from '../../models/order';
+import { Order, OrderStatus } from '../../models/order';
 import { Ticket } from '../../models/ticket';
 
 it('returns an error if the ticket does not exist', async () => {
